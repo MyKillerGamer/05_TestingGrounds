@@ -26,7 +26,7 @@ AFirstPersonCharacter::AFirstPersonCharacter()
 	// set our turn rates for input
 	BaseTurnRate = 45.f;
 	BaseLookUpRate = 45.f;
-
+	
 	// Create a CameraComponent	
 	FirstPersonCameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("FirstPersonCamera"));
 	FirstPersonCameraComponent->SetupAttachment(GetCapsuleComponent());
@@ -78,7 +78,7 @@ void AFirstPersonCharacter::SetupPlayerInputComponent(class UInputComponent* Inp
 	//InputComponent->BindTouch(EInputEvent::IE_Pressed, this, &AFirstPersonCharacter::TouchStarted);
 	if(EnableTouchscreenMovement(InputComponent) == false)
 	{
-		InputComponent->BindAction("Fire", IE_Pressed, Rifle, &ARifle::OnFire);
+		//InputComponent->BindAction("Fire", IE_Pressed, Rifle, &ARifle::OnFire);
 	}
 
 	InputComponent->BindAxis("MoveForward", this, &AFirstPersonCharacter::MoveForward);
