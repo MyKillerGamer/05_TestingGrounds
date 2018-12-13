@@ -12,6 +12,15 @@ class S05_TESTINGGROUNDS_API AMannequin : public ACharacter
 	GENERATED_BODY()
 
 public:
+
+	/** Pawn mesh: 1st person view (arms; seen only by self) */
+	UPROPERTY(VisibleDefaultsOnly, Category = Mesh)
+	class USkeletalMeshComponent* Mesh1P;
+
+	/** First person camera */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
+	class UCameraComponent* FirstPersonCameraComponent;
+
 	// Sets default values for this character's properties
 	AMannequin();
 
@@ -19,7 +28,7 @@ public:
 	TSubclassOf<class ARifle> RifleBlueprint;
 
 	UFUNCTION(BlueprintCallable, Category = "Weapon")
-	void Fire();
+	void PullTrigger();
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -33,14 +42,6 @@ protected:
 	virtual void BeginPlay() override;
 
 private:
-
-	/** First person camera */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
-	class UCameraComponent* FPCamera;
-
-	/** Pawn mesh: 1st person view (arms; seen only by self) */
-	UPROPERTY(VisibleDefaultsOnly, Category = Mesh)
-	class USkeletalMeshComponent* FPMesh;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	ARifle* Rifle;
