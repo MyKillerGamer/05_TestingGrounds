@@ -61,7 +61,7 @@ void AFirstPersonCharacter::BeginPlay()
 	}
 	Rifle = GetWorld()->SpawnActor<ARifle>(RifleBlueprint);
 	Rifle->AttachToComponent(Mesh1P, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("GripPoint")); //Attach gun mesh component to Skeleton, doing it here because the skelton is not yet created in the constructor
-	Rifle->AnimInstance = Mesh1P->GetAnimInstance();
+	Rifle->AnimInstance1P = Mesh1P->GetAnimInstance();
 	//InputComponent->BindTouch(EInputEvent::IE_Pressed, this, &AFirstPersonCharacter::TouchStarted);
 	if(EnableTouchscreenMovement(InputComponent) == false)
 	{

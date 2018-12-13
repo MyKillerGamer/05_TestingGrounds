@@ -35,19 +35,22 @@ void AMannequin::BeginPlay()
 {
 	Super::BeginPlay();
 
-	if(RifleBlueprint != NULL)
+	if(RifleBlueprint != nullptr)
 	{
 		Rifle = GetWorld()->SpawnActor<ARifle>(RifleBlueprint);
-		if(IsPlayerControlled)
+
+		//Attach gun mesh component to Skeleton, doing it here because the skeleton is not yet created in the constructor
+		if(IsPlayerControlled())
 		{
-			Rifle->AttachToComponent(Mesh1P, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("GripPoint")); //Attach gun mesh component to Skeleton, doing it here because the skelton is not yet created in the constructor
+			Rifle->AttachToComponent(Mesh1P, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("GripPoint"));
 		}
 		else 
 		{ 
-			//Rifle->AttachToComponent(GetMesh(), FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("GripPoint")); 
+			Rifle->AttachToComponent(GetMesh(), FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("GripPoint")); 
 		}
 		
-		Rifle->AnimInstance = GetMesh()->GetAnimInstance();
+		Rifle->AnimInstance1P = Mesh1P->GetAnimInstance();
+		Rifle->AnimInstance3P = GetMesh()->GetAnimInstance();
 	}
 	else { UE_LOG(LogTemp, Warning, TEXT("Rifle Blueprint Missing.")); }
 	
@@ -67,9 +70,22 @@ void AMannequin::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 	InputComponent->BindAction("Fire", IE_Pressed, this, &AMannequin::PullTrigger);
 }
 
+void AMannequin::UnPossessed() 
+{
+	Super::UnPossessed();
+
+	if(Rifle == nullptr)
+	{
+		UE_LOG(LogTemp, Error, TEXT("Gun is not available"))
+			return;
+	}
+	UE_LOG(LogTemp, Warning, TEXT("Gun re-attached"))
+	Rifle->AttachToComponent(GetMesh(), FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("GripPoint"));
+}
+
 void AMannequin::PullTrigger()
 {
-	if(Rifle != NULL)
+	if(Rifle != nullptr)
 	{
 		Rifle->OnFire();
 	}
