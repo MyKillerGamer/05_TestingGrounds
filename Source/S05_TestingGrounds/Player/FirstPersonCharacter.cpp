@@ -9,7 +9,6 @@
 #include "../Weapons/Rifle.h"
 
 #include "Animation/AnimInstance.h"
-#include "GameFramework/InputSettings.h"
 #include "HeadMountedDisplayFunctionLibrary.h"
 #include "MotionControllerComponent.h"
 

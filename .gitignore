@@ -12,3 +12,5 @@ Saved
 *.suo
 *.xcodeproj
 *.xcworkspace
+Content/Dynamic/Levels/FirstPersonExampleMap_BuiltData.uasset
+Content/Dynamic/Levels/TestingGround_BuiltData.uasset
