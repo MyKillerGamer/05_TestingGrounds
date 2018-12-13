@@ -1,0 +1,19 @@
+
+What we have:
+When play begins, we set up the blackboard to be used, and then tell the AI to run the behaviour tree, then to set a reference to the blackboard.
+The behaviour tree, GuardBehaviour, sets the focus of the AI every tick, and tries to set the last seen location of the player.
+If there is a player who is seen, Last seen location is set, and if they are also not within 3 metres of that character, then they move towards the character.
+If there is a last seen location that is set, but there is no player who is noticed, then the AI is told to move to where the player was last seen. Shortly thereafter, Last seen location is cleared.
+If neither of the above conditions is true, then the AI just patrols between  predefined points.
+
+Every frame, or tick, the Controlled pawn is cast to the correct type, and, is the focussed actor is valid, then they are put into the aiming state.
+Currently they are also put into the shooting state, but later that should only happen if the have the target in line of sight.
+
+Finally, Whenever their target perception updates, then it checks first to see if the character detected is a player (Or rather, is not an enemy of the player), then if whatever it was, was successfully sensed.
+If it was successfully sensed, then it is set as the target for the AI to go after, otherwise the target is cleared.
+
+MVP:
+If you have line of sight to the target, shoot it.
+If you know the target's location, approach within a 3m range of it.
+If you know the last know location of the target, but have not visited, investigate.
+If none of the above are active, continue to patrol.

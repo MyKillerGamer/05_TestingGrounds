@@ -26,8 +26,8 @@ AFirstPersonCharacter::AFirstPersonCharacter()
 	// set our turn rates for input
 	BaseTurnRate = 45.f;
 	BaseLookUpRate = 45.f;
-	
-	// Create a CameraComponent	
+
+	// Create a CameraComponent
 	FirstPersonCameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("FirstPersonCamera"));
 	FirstPersonCameraComponent->SetupAttachment(GetCapsuleComponent());
 	FirstPersonCameraComponent->RelativeLocation = FVector(-39.56f, 1.75f, 64.f); // Position the camera
@@ -51,7 +51,7 @@ AFirstPersonCharacter::AFirstPersonCharacter()
 
 void AFirstPersonCharacter::BeginPlay()
 {
-	// Call the base class  
+	// Call the base class
 	Super::BeginPlay();
 
 
@@ -82,7 +82,7 @@ void AFirstPersonCharacter::SetupPlayerInputComponent(class UInputComponent* Inp
 	InputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 	InputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
 
-	
+
 
 	InputComponent->BindAxis("MoveForward", this, &AFirstPersonCharacter::MoveForward);
 	InputComponent->BindAxis("MoveRight", this, &AFirstPersonCharacter::MoveRight);
