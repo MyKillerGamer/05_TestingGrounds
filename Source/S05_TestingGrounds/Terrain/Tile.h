@@ -6,8 +6,6 @@
 #include "GameFramework/Actor.h"
 #include "Tile.generated.h"
 
-class UActorPool
-
 UCLASS()
 class S05_TESTINGGROUNDS_API ATile : public AActor
 {
@@ -24,12 +22,14 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	virtual void EndPlay(	const EEndPlayReason::Type EndPlayReason	) override;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 	UFUNCTION(BlueprintCallable, Category = "Pool")
-		void SetPool(UActorPool* Pool);
+		void SetPool(class UActorPool* Pool);
 
 private:
 
@@ -40,4 +40,8 @@ private:
 	bool CanSpawnAtLocation(FVector Location, float Radius);
 
 	UActorPool* Pool;
+
+	void PositionNavMeshBoundsVolume();
+
+	AActor* NavMeshBoundsVolume;
 };

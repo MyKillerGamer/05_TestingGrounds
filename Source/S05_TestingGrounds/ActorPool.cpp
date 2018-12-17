@@ -14,11 +14,13 @@ UActorPool::UActorPool()
 
 AActor * UActorPool::Checkout()
 {
+	UE_LOG(LogTemp, Warning, TEXT("[%s] Checkout"), *GetName());
 	return nullptr;
 }
 
 void UActorPool::Return(AActor * ActorToReturn)
 {
+	UE_LOG(LogTemp, Warning, TEXT("[%s] Actor Returned: {%s}"), *GetName(), *ActorToReturn->GetName());
 }
 
 void UActorPool::Add(AActor * ActorToAdd)
